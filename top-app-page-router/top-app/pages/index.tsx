@@ -1,10 +1,12 @@
 import { Button, Htag, P, Rating } from '@/components';
 import { Tag } from '@/components/Tag/Tag';
+import { withLayout } from '@/layout/Layout';
 import { Noto_Sans_KR } from 'next/font/google';
 import { useEffect, useState } from 'react';
 
 const notoSans = Noto_Sans_KR({ subsets: ['cyrillic'] });
-export default function Home() {
+
+function Home() {
   const [counter, setCounter] = useState<number>(0);
   useEffect(() => {
     console.log(`Counter: ${counter}`);
@@ -28,7 +30,9 @@ export default function Home() {
       <Tag size='lg' color='gray' >{counter}</Tag>
       <Tag size='sm' color='green' >Green</Tag>
       <Tag size='sm' color='primary' href='/about'>Primary</Tag>
-      <Rating rating={counter} isEditable={true} setRating={setCounter}/>
+      <Rating rating={counter} isEditable={true} setRating={setCounter} />
     </main>
   );
 }
+
+export default withLayout(Home);
