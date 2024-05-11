@@ -1,17 +1,18 @@
 import { Button, Htag, P, Rating } from '@/components';
 import { Tag } from '@/components/Tag/Tag';
 import { withLayout } from '@/layout/Layout';
+import { GetStaticProps } from 'next';
 import { Noto_Sans_KR } from 'next/font/google';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { MenuItem } from '@/interfaces/menu.interface';
 
 const notoSans = Noto_Sans_KR({ subsets: ['cyrillic'] });
 
-function Home() {
+function Home({ menu, firstCategory }: HomeProps) {
   const [counter, setCounter] = useState<number>(0);
   useEffect(() => {
-    console.log(`Counter: ${counter}`);
     return function cleanUp() {
-      console.log('UnMount');
     }
   }, [counter])
   return (
@@ -31,8 +32,24 @@ function Home() {
       <Tag size='sm' color='green' >Green</Tag>
       <Tag size='sm' color='primary' href='/about'>Primary</Tag>
       <Rating rating={counter} isEditable={true} setRating={setCounter} />
+      <ul>
+        {menu.map(m => (<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
+      </ul>
     </main>
   );
 }
 
 export default withLayout(Home);
+
+export const getStaticProps: GetStaticProps = async () => {
+  const firstCategory = 0;
+  const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', {firstCategory});
+  return {
+    props: { menu, firstCategory }
+  };
+};
+
+interface HomeProps extends Record<string, unknown> {
+  menu: MenuItem[],
+  firstCategory: number
+}
