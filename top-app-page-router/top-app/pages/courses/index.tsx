@@ -1,6 +1,6 @@
 import { withLayout } from "@/layout/Layout";
 
-function Courses() {
+function Courses(): JSX.Element {
     return (
         <>Courses index page</>
     );

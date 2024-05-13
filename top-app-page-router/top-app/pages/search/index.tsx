@@ -1,6 +1,6 @@
 import { withLayout } from "@/layout/Layout";
 
-function SearchPage() {
+function SearchPage(): JSX.Element {
     return (
         <>Search</>
     );
