@@ -1,8 +1,6 @@
 import { TopPageComponentProps } from "./TopPageComponent.props";
-import cn from 'classnames';
 import styles from './TopPageComponent.module.css';
-import { Cadr, HHData, Htag } from "@/components";
-import { Tag } from "@/components/Tag/Tag";
+import { Advantages, Tag, HHData, Htag, P } from "@/components";
 import { TopLevelCategory } from "@/interfaces/toppage.interface";
 
 export const TopPageComponent = ({ firstCategory, page, products }: TopPageComponentProps): JSX.Element => {
@@ -18,7 +16,21 @@ export const TopPageComponent = ({ firstCategory, page, products }: TopPageCompo
                 <Htag tag="h2">Вакансии - {page?.category}</Htag>
                 <Tag color="red" size="lg" >hh.ru</Tag>
             </div>
-            {firstCategory === TopLevelCategory.Courses && <HHData {...page?.hh} />}
+            {firstCategory === TopLevelCategory.Courses && page.hh && <HHData {...page.hh} />}
+            {
+                page?.advantages && page?.advantages?.length > 0 &&
+                <>
+                    <Htag tag='h2'>Преимущества</Htag>
+                    <Advantages adventages={page.advantages} />
+                </>
+            }
+            {
+                page?.seoText && <div className={styles.seo} dangerouslySetInnerHTML={{__html: page?.seoText}} />
+            }
+            <Htag tag='h2'>Получаемые навыки</Htag>
+            {
+                page?.tags?.map(t => <Tag color='primary' key={t}>{t}</Tag>)
+            }
         </div>
     );
 }
