@@ -6,3 +6,6 @@ export * from './Card/Cadr';
 export * from './HHData/HHData';
 export * from './Advantages/Advantages';
 export * from './Tag/Tag';
+export * from './Sort/Sort';
+export * from './Input/Input';
+export * from './TextArea/TextArea';

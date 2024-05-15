@@ -9,6 +9,9 @@ import { firstLevelMenu } from "@/helpers/helpers";
 import { TopPageComponent } from "@/page-components/TopPageComponent/TopPageComponent";
 
 function TopPage({ menu, page, products, firstCategory }: TopPageProps) {
+    if (!page || !products) {
+        return <></>;
+    }
     return <TopPageComponent firstCategory={firstCategory} page={page} products={products} />;
 }
 
@@ -40,7 +43,7 @@ export const getStaticProps: GetStaticProps<TopPageProps> = async ({ params }: G
             }
         }
         const { data: menu } = await axios.post<MenuItem[]>(process.env.NEXT_PUBLIC_DOMAIN + '/api/top-page/find', { firstCategory: firstCategoryItem?.id });
-        if(!menu.length) {
+        if (!menu.length) {
             return {
                 notFound: true
             };

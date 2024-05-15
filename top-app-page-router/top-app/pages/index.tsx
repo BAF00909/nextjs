@@ -1,4 +1,4 @@
-import { Button, Htag, P, Rating } from '@/components';
+import { Button, Htag, Input, P, Rating, TextArea } from '@/components';
 import { Tag } from '@/components/Tag/Tag';
 import { withLayout } from '@/layout/Layout';
 import { GetStaticProps } from 'next';
@@ -32,9 +32,8 @@ function Home({ menu, firstCategory }: HomeProps) {
       <Tag size='sm' color='green' >Green</Tag>
       <Tag size='sm' color='primary' href='/about'>Primary</Tag>
       <Rating rating={counter} isEditable={true} setRating={setCounter} />
-      <ul>
-        {menu.map(m => (<li key={m._id.secondCategory}>{m._id.secondCategory}</li>))}
-      </ul>
+      <Input placeholder='Имя' />
+      <TextArea placeholder='Текст отзыва' />
     </main>
   );
 }
