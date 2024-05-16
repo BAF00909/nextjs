@@ -1,18 +1,18 @@
 import { HHDataProps } from "./HHData.props";
 import cn from 'classnames';
 import styles from './HHData.module.css';
-import { Cadr } from '../index';
+import { Card } from '../index';
 import RateIcon from './icons/rate.svg';
 import { priceRu } from "@/helpers/helpers";
 
 export const HHData = ({ children, className, count, juniorSalary, middleSalary, seniorSalary }: HHDataProps): JSX.Element => {
     return (
         <div className={cn(className, styles.hh)} >
-            <Cadr className={styles.count}>
+            <Card className={styles.count}>
                 <div className={styles.title}>Всего вакансий</div>
                 <div className={styles.countValue}>{count}</div>
-            </Cadr>
-            <Cadr className={styles.salary}>
+            </Card>
+            <Card className={styles.salary}>
                 <div>
                     <div className={styles.title}>Начальный</div>
                     <div className={styles.salaryValue}>{priceRu(juniorSalary)}</div>
@@ -40,7 +40,7 @@ export const HHData = ({ children, className, count, juniorSalary, middleSalary,
                         <RateIcon className={styles.filled} />
                     </div>
                 </div>
-            </Cadr>
+            </Card>
             {children}
         </div >
     );

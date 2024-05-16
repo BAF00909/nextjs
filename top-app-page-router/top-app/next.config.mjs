@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.vkcs.cloud',
+        port: '',
+      },
+    ],
+  },
   webpack(config, options) {
 
     config.module.rules.push({
@@ -14,7 +23,6 @@ const nextConfig = {
     return config;
 
   },
-
 };
 
 export default nextConfig;

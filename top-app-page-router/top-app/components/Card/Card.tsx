@@ -1,8 +1,8 @@
-import { CadrProps } from "./Cadr.props";
+import { CadrProps } from "./Card.props";
 import cn from 'classnames';
-import styles from './Cadr.module.css';
+import styles from './Card.module.css';
 
-export const Cadr = ({ color, children, className, ...rest }: CadrProps): JSX.Element => {
+export const Card = ({ color, children, className, ...rest }: CadrProps): JSX.Element => {
     return (
         <div
             className={cn(className, styles.card, {
