@@ -1,14 +1,15 @@
 import { TopPageComponentProps } from "./TopPageComponent.props";
 import styles from './TopPageComponent.module.css';
-import { Advantages, Tag, HHData, Htag, Sort, Product, MotionProductComponent } from "@/components";
+import { Advantages, Tag, HHData, Htag, Sort, Product, MotionProductComponent, Up } from "@/components";
 import { TopLevelCategory } from "@/interfaces/toppage.interface";
 import { SortEnum } from "@/components/Sort/Sort.props";
 import { useEffect, useReducer } from "react";
 import { sortReducer } from "./sort.reducer";
+import { useScrollY } from "@/hooks/useScrollY";
 
 export const TopPageComponent = ({ firstCategory, page, products }: TopPageComponentProps): JSX.Element => {
     const [state, dispatch] = useReducer(sortReducer, { products, sort: SortEnum.Rating });
-
+    const y = useScrollY();
     const setSort = (sort: SortEnum) => {
         dispatch({ type: sort });
     }
@@ -44,6 +45,7 @@ export const TopPageComponent = ({ firstCategory, page, products }: TopPageCompo
             {
                 page?.tags?.map(t => <Tag color='primary' key={t}>{t}</Tag>)
             }
+            <Up />
         </div>
     );
 }
