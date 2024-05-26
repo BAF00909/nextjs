@@ -26,6 +26,17 @@ export const Product = forwardRef(({ product, className, ...rest }: ProductProps
             block: 'start'
         });
     }
+    const variants = {
+        visible: {
+            opacity: 1,
+            height: 'auto',
+        },
+        hidden: {
+            opacity: 0,
+            height: 0,
+            overflow: 'hidden'
+        }
+    }
     return (
         <div className={className} {...rest} ref={ref}>
             <Card className={styles.product}>
@@ -84,22 +95,21 @@ export const Product = forwardRef(({ product, className, ...rest }: ProductProps
                 </div>
             </Card>
 
-            <Card
-                color='blue'
-                className={cn(styles.reviews, {
-                    [styles.opened]: isReviewOpened,
-                    [styles.closed]: !isReviewOpened,
-                })}
-                ref={reviewRef}
-            >
-                {product?.reviews && product?.reviews.map(r => (
-                    <div key={r._id}>
-                        <Review review={r} />
-                        <Divider />
-                    </div>
-                ))}
-                <ReviewForm productId={product._id} />
-            </Card>
+            <motion.div variants={variants} animate={isReviewOpened ? 'visible' : 'hidden'} initial={'hidden'}>
+                <Card
+                    color='blue'
+                    className={cn(styles.reviews)}
+                    ref={reviewRef}
+                >
+                    {product?.reviews && product?.reviews.map(r => (
+                        <div key={r._id}>
+                            <Review review={r} />
+                            <Divider />
+                        </div>
+                    ))}
+                    <ReviewForm productId={product._id} />
+                </Card>
+            </motion.div>
         </div>
     );
 });

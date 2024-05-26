@@ -34,6 +34,7 @@
             "header"
             "main"
             "footer";
+        gap: 10px;
     }
 
     .sidebar {
@@ -41,8 +42,9 @@
     }
 
     .header {
-        display: block;
+        display: grid;
     }
+
     .main {
         padding: 15px;
     }

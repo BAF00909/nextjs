@@ -5,6 +5,7 @@ import ArrorUpIcon from './icons/arrowUp.svg';
 import { useScrollY } from "@/hooks/useScrollY";
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
+import { ButtonIcon } from "../ButtonIcon/ButtonIcon";
 
 export const Up = ({ className, ...rest }: UpProps): JSX.Element => {
     const control = useAnimation();
@@ -19,13 +20,12 @@ export const Up = ({ className, ...rest }: UpProps): JSX.Element => {
         })
     };
     return (
-        <motion.button
+        <motion.div
             className={cn(styles.up, className, {})}
-            onClick={scrollToTop}
             animate={control}
             initial={{opacity: 0}}
         >
-            <ArrorUpIcon />
-        </motion.button>
+            <ButtonIcon appearence="white" icon='upIcon' onClick={scrollToTop}/>
+        </motion.div>
     );
 }
